@@ -1,0 +1,59 @@
+
+1) Docker Repo account
+
+2) Docker login :-
+        sudo docker login
+
+3)One sample node server with hello world console
+
+4)Create a DockerFile
+
+5)Build an image - docker build -t 'Tag name' 'image name' . 
+  Test image locally
+  Tag an image - docker tag imageid reponame:version
+  Push an image - docker push reponame:version
+
+6)Pull same image
+
+
+***** Kubernetes *****
+
+1) Install kubernetes, minikube - Local cluster setup
+
+2) Minikube start , get nodes
+
+3) Pods , Create pod with kubernetes create -f "podfile name" , get pods, describe pod 'pod name'
+
+4) Expose pod :- 2 ways - kubectl port-forword "pod name" 4794:4794 ---> not daemonize 
+                        - Make service from pod 
+                            kubectl expose pod "pod name " --type=NodePort --name "We need to give this service a name"
+                            Get url of running service  ---> minkube service "Service name" --url
+                
+                
+                Some kubctl commands :- 
+                1) Execute commands:- sudo kubectl exec nodehelloworld.example.com -- ls /usr/src/app
+                2) Service list - sudo kubectl get service
+
+5) Replication Controller :- 
+            1) sudo kubectl create -f replicationController.yaml
+            2) sudo kubectl get replicationcontroller
+            3) sudo kubectl delete replicationcontroller helloworld-container
+
+6) 
+sudo kubectl create -f deployment-helloworld.yaml
+sudo kubectl expose deployment helloworld-deployment --type=LoadBalancer --name=my-service
+
+sudo kubctl get deployment
+sudo kubectl get rs
+sudo kubectl get pods --show-labels
+
+sudo kubectl rollout status deployment/helloworld-deployment
+sudo kubectl rollout history deployment/helloworld-deployment
+
+Updating Image :- ---> sudo kubectl set image deployment/helloworld-deployment node-demo=abhishek4794/nodejsapp:v2
+Undo deployment :- ----> sudo kubectl rollout undo deployment/helloworld-deployment
+
+
+
+
+

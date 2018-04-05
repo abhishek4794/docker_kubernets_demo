@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata : 
+ name: helloworld-redis-deployment 
+spec :
+ replicas: 3
+ selector:
+  matchLabels:
+   app: helloworld-redis
+ template:
+  metadata:
+   labels:
+    app: helloworld-redis
+  spec:
+   containers:
+   - name: node-redis
+     image: abhishek4794/nodejsapp:v3
+     ports:
+     - name : nodejs-port
+       containerPort: 4794
+     env:
+     - name: REDIS_HOST
+       value: database-redis-service
+       name: REDIS_PORT
+       value: redis-port

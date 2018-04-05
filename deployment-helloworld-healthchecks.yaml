@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata : 
+ name: helloworld-deployment 
+spec :
+ replicas: 3
+ selector:
+  matchLabels:
+   app: helloworld
+ template:
+  metadata:
+   labels:
+    app: helloworld
+  spec:
+   containers:
+   - name: node-demo
+     image: abhishek4794/nodejsapp:v1
+     ports:
+     - containerPort: 4794
+     livenessProbe : 
+      httpGet:
+       path: /
+       port: 4794
+      initialDelaySeconds: 15
+      timeoutSeconds: 30
